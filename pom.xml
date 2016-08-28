@@ -69,4 +69,8 @@
 			</plugin>
 		</plugins>
 	</build>
+	<modules>
+		<module>01-jamon</module>
+		<module>02-simon</module>
+	</modules>
 </project>
