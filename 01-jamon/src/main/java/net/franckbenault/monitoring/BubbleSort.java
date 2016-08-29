@@ -2,9 +2,9 @@ package net.franckbenault.monitoring;
 
 import java.util.Date;
 
-import org.javasimon.SimonManager;
-import org.javasimon.Split;
-import org.javasimon.Stopwatch;
+import com.jamonapi.Monitor;
+import com.jamonapi.MonitorFactory;
+
 
 /*
 Java Bubble Sort Example
@@ -14,10 +14,11 @@ sort algorithm. Bubble sort is the simplest sorting algorithm.
 
 public class BubbleSort {
 	
-	private static Stopwatch stopwatch = 
-			SimonManager.getStopwatch(BubbleSort.class.getCanonicalName());
+	private static Monitor monitor;
+	
 
 	public static void main(String[] args) {
+		monitor = MonitorFactory.start(BubbleSort.class.getCanonicalName());
 		
 		for (int j = 0; j < 100; j++) {
 
@@ -46,24 +47,25 @@ public class BubbleSort {
 			//	System.out.print(intArray[i] + " ");
 			//}
 		}
-		
-		System.out.println("\n\nStopwatch: " + stopwatch);
-		System.out.println("stopwatch.getCounter()="+stopwatch.getCounter());
-		System.out.println("stopwatch.getMax() (nanosecond)="+stopwatch.getMax());
-		System.out.println("stopwatch.getMin() (nanosecond)="+stopwatch.getMin());
-		System.out.println("stopwatch.getMean() (nanosecond)="+stopwatch.getMean());
-		System.out.println("stopwatch.getStandardDeviation()="+stopwatch.getStandardDeviation());
-		System.out.println("stopwatch.getTotal() (nanosecond)="+stopwatch.getTotal());
-		System.out.println("stopwatch.getLast() (nanosecond)="+stopwatch.getLast());
-		System.out.println("stopwatch.getFirstUsage()="+new Date(stopwatch.getFirstUsage()));
-		System.out.println("stopwatch.getLastUsage()"+new Date(stopwatch.getLastUsage()));
+		System.out.println("\n\nMonitor: " + monitor);
+		//counter but why a double ? 
+		System.out.println("monitor.getHits()="+monitor.getHits());
+		//unit are microsecond
+		System.out.println("monitor.getMax() (microsecond)="+monitor.getMax());
+		System.out.println("monitor.getMin() (microsecond)="+monitor.getMin());
+		System.out.println("monitor.getAvg() (microsecond)="+monitor.getAvg());
+		System.out.println("monitor.getStdDev()="+monitor.getStdDev());
+		System.out.println("monitor.getTotal() (microsecond)="+monitor.getTotal());
+		System.out.println("monitor.getLastValue() (microsecond)="+monitor.getLastValue());
+		System.out.println("monitor.getFirstAccess()="+monitor.getFirstAccess());
+		System.out.println("monitor.getLastAccess()="+monitor.getFirstAccess());
 		
 		
 
 	}
 
 	private static void bubbleSort(int[] intArray) {
-
+		
 		/*
 		 * In bubble sort, we basically traverse the array from first to
 		 * array_length - 1 position and compare the element with the next one.
@@ -81,8 +83,7 @@ public class BubbleSort {
 		 * Repeat the same steps for array[1] to array[n-1]
 		 * 
 		 */
-
-		Split split = stopwatch.start(); // returns split object
+		monitor.start();
 		
 		int n = intArray.length;
 		int temp = 0;
@@ -101,7 +102,7 @@ public class BubbleSort {
 		}
 		
 		// here goes the measured code
-		split.stop(); 
+		monitor.stop(); 
 	}
 }
 
