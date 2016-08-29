@@ -1,5 +1,7 @@
 package net.franckbenault.monitoring;
 
+import java.util.Date;
+
 import org.javasimon.SimonManager;
 import org.javasimon.Split;
 import org.javasimon.Stopwatch;
@@ -41,6 +43,17 @@ public class BubbleSort {
 		}
 		
 		System.out.println("\n\nStopwatch: " + stopwatch);
+		System.out.println("stopwatch.getCounter()="+stopwatch.getCounter());
+		System.out.println("stopwatch.getMax() (nanosecond)="+stopwatch.getMax());
+		System.out.println("stopwatch.getMin() (nanosecond)="+stopwatch.getMin());
+		System.out.println("stopwatch.getMean() (nanosecond)="+stopwatch.getMean());
+		System.out.println("stopwatch.getStandardDeviation()="+stopwatch.getStandardDeviation());
+		System.out.println("stopwatch.getTotal() (nanosecond)="+stopwatch.getTotal());
+		/*stopwatch.getLast();*/
+		System.out.println("stopwatch.getFirstUsage()="+new Date(stopwatch.getFirstUsage()));
+		System.out.println("stopwatch.getLastUsage()"+new Date(stopwatch.getLastUsage()));
+		
+		
 
 	}
 
